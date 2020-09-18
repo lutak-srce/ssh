@@ -125,5 +125,5 @@ do_rsa_keygen
 do_dsa_keygen
 do_ecdsa_keygen
 do_ed25519_keygen
-chmod -R 440 $KEYSDIR/*
+#chmod -R 440 $KEYSDIR/*
 echo "Success" && exit 0
