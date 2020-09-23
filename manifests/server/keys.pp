@@ -61,7 +61,7 @@ class ssh::server::keys (
   }
 
   # ED25519 key: can be enabled if master is EL7
-  if ( 0 + $::facts['os']['release']['major'] > 6 ) {
+  if Float($::facts['os']['release']['major']) > 6 {
     file { '/etc/ssh/ssh_host_ed25519_key':
       group  => $private_group,
       mode   => $private_mode,
