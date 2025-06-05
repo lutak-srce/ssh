@@ -3,7 +3,7 @@
 #
 class ssh::params {
   $package_ensure = 'present'
-  case $::osfamily {
+  case $facts['os']['family'] {
     /(Debian|debian|Ubuntu|ubuntu)/: {
       $server_package_name = 'openssh-server'
       $client_package_name = 'openssh-client'
@@ -21,7 +21,7 @@ class ssh::params {
       $ssh_config          = '/etc/ssh/ssh_config'
       $ssh_known_hosts     = '/etc/ssh/ssh_known_hosts'
       $service_name        = 'sshd'
-      case $::operatingsystemmajrelease {
+      case $facts['os']['release']['major'] {
         default: {
           $private_mode  = '0600'
           $private_group = 'root'
@@ -33,9 +33,9 @@ class ssh::params {
       }
     }
     default: {
-      case $::operatingsystem {
+      case $facts['os']['name'] {
         default: {
-          fail("Unsupported platform: ${::osfamily}/${::operatingsystem}")
+          fail("Unsupported platform: ${facts['os']['family']}/${facts['os']['name']}")
         }
       }
     }
